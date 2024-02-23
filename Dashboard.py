@@ -23,7 +23,7 @@ st.sidebar.header("Bar Chart 2 Parameters")
 barchat2_parameter=st.sidebar.selectbox("Select a parameter",['SMV', 'Incentive Pay','Number of Workers'])
 
 #Dataset value
-df=pd.read_csv("D:/University/3rd Year/2nd Semester/ST3082 Statistical Learning/Project APP/pythonProject/mydata.csv")
+df=pd.read_csv("mydata.csv")
 df.date=pd.to_datetime(df.date)
 df=df.sort_values(by=['date'])
 df = df[(df['date'] > d_min) & (df['date'] < d_max)]
