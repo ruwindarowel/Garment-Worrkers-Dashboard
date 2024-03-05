@@ -29,14 +29,14 @@ df=df.sort_values(by=['date'])
 df = df[(df['date'] > d_min) & (df['date'] < d_max)]
 df_teams=pd.DataFrame({"Team":list(range(1,13)),"Average Productivity":list(df.groupby(["team"]).actual_productivity.agg(np.mean)),"SMV":list(df.groupby(["team"]).smv.agg(np.mean)),"Incentive Pay":list(df.groupby(["team"]).incentive.agg(np.mean)),"Number of Workers":list(df.groupby(["team"]).no_of_workers.agg(np.mean))})
 
+#Headings
+st.header("Teamwise Statistics")
+#Barcharts
 col1,col2=st.columns(2)
 with col1:
-    st.header("Teamwise Productivity")
     st.bar_chart(df_teams, y=barchat1_parameter, x="Team")
-
-    st.header("Daily Productivity")
-    df_date_nums_mean = df.groupby(["date_num"]).actual_productivity.agg(np.mean)
-    df_date_nums_mean_targeted = df.groupby(["date_num"]).targeted_productivity.agg(np.mean)
+    df_date_nums_mean = df.groupby(["date_num"]).actual_productivity.agg(mean)
+    df_date_nums_mean_targeted = df.groupby(["date_num"]).targeted_productivity.agg(mean)
     df_date_nums_mean = list(df_date_nums_mean)
     df_date_nums_mean_targeted = list(df_date_nums_mean_targeted)
     df_dates_means = pd.DataFrame({"Date": list(sorted(df.date_num.unique())), "Actual Productivity": df_date_nums_mean,
@@ -44,7 +44,6 @@ with col1:
     st.line_chart(df_dates_means, x='Date', y=plot_data, height=500, width=500)
 
 with col2:
-    st.header("Teamwise Statistics")
     st.bar_chart(df_teams,y=barchat2_parameter,x="Team")
     #st.bar_chart(pd.DataFrame(df.groupby(["team"]).actual_productivity.agg(np.mean)),y='actual_productivity')
     st.header("Important KPI's")
