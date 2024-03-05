@@ -35,8 +35,8 @@ st.header("Teamwise Statistics")
 col1,col2=st.columns(2)
 with col1:
     st.bar_chart(df_teams, y=barchat1_parameter, x="Team")
-    df_date_nums_mean = df.groupby(["date_num"]).actual_productivity.agg(mean)
-    df_date_nums_mean_targeted = df.groupby(["date_num"]).targeted_productivity.agg(mean)
+    df_date_nums_mean = df.groupby(["date_num"]).actual_productivity.agg(np.mean)
+    df_date_nums_mean_targeted = df.groupby(["date_num"]).targeted_productivity.agg(np.mean)
     df_date_nums_mean = list(df_date_nums_mean)
     df_date_nums_mean_targeted = list(df_date_nums_mean_targeted)
     df_dates_means = pd.DataFrame({"Date": list(sorted(df.date_num.unique())), "Actual Productivity": df_date_nums_mean,
